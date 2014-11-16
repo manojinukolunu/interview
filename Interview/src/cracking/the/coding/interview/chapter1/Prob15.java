@@ -28,6 +28,10 @@ public class Prob15 {
 		}
 	}
 	public static void main(String args[]) {
-		System.out.println(compress("bbbccccd"));
+		assert compress(
+				"WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWBWWWWWWWWWWWWWW")
+				.equals("12W1B12W3B24W1B14W");
+		System.out
+				.println(compress("WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWBWWWWWWWWWWWWWW"));
 	}
 }
