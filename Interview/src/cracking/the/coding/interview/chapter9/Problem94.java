@@ -6,7 +6,7 @@ import java.util.HashSet;
 
 public class Problem94 {
 	public static void main(String args[]) {
-		int array[] = { 1, 2, 3, 4 };
+		int array[] = { 1, 2, 3, 4 ,5};
 		System.out.println(Arrays.toString(genSubsets(array).toArray()));
 	}
 
@@ -15,6 +15,7 @@ public class Problem94 {
 		for (int i = 0; i < array.length; i++) {
 			addToSubsets(subsets, array[i]);
 		}
+		System.out.println(subsets.size());
 		return subsets;
 	}
 
@@ -22,19 +23,22 @@ public class Problem94 {
 			int integer) {
 		HashSet<Integer> newSet = new HashSet<Integer>();
 		newSet.add(integer);
-		HashSet<Integer> __newSet = new HashSet<Integer>();
+		ArrayList<HashSet<Integer>> __newSet = new ArrayList<HashSet<Integer>>();
 		if (subsets.contains(newSet)) {
 			// dont do anything
 		} else {
 			// add i to every element in the set
 			for (int j = 0; j < subsets.size(); j++) {
 				HashSet<Integer> _newSet = new HashSet<Integer>(subsets.get(j));
-				_newSet.add(integer);
-				__newSet.addAll(_newSet);
+				if (!_newSet.isEmpty()) {
+					_newSet.add(integer);
+					__newSet.add(_newSet);
+				}
+
 			}
 			// add integer to the set
 			subsets.add(newSet);
-			subsets.add(__newSet);
+			subsets.addAll(__newSet);
 		}
 	}
 
