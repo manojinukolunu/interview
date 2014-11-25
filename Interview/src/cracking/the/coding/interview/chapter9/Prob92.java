@@ -5,13 +5,14 @@ public class Prob92 {
 		int[][] grid = new int[x + 1][y + 1];
 		for (int i = 0; i < x; i++) {
 			for (int j = 0; j < y; j++) {
-				grid[i][j] = 0;
+				grid[i][j] = 1; // The mininum number of ways to get to
+								// gird[x][y]
 			}
 		}
 		return numPaths(x, y, grid);
 	}
 	private static int numPaths(int x, int y, int[][] grid) {
-		if ((x == 1) || (y == 1)) { // TODO : why 1??
+		if ((x == 0) || (y == 0)) {
 			return 1;
 		}
 		if (grid[x][y] > 0) {
