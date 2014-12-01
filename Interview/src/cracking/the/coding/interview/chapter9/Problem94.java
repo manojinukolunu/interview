@@ -6,7 +6,7 @@ import java.util.HashSet;
 
 public class Problem94 {
 	public static void main(String args[]) {
-		int array[] = {1, 2, 3, 4, 5, 6};
+		int array[] = { 1, 2, 3, 4 ,5};
 		System.out.println(Arrays.toString(genSubsets(array).toArray()));
 	}
 
