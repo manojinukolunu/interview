@@ -45,12 +45,12 @@ public class BinaryTreeTest {
 			BinaryTreeNoParentNode<Integer> node = new BinaryTreeNoParentNode<Integer>();
 			node.data = i;
 			bTreeNode.left = node;
-			return bTreeNode;
+			return node;
 		} else if (string.equals("right")) {
 			BinaryTreeNoParentNode<Integer> node = new BinaryTreeNoParentNode<Integer>();
 			node.data = i;
 			bTreeNode.right = node;
-			return bTreeNode;
+			return node;
 		}
 		return null;
 	}
