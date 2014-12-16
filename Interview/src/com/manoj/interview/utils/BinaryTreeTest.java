@@ -5,14 +5,14 @@ import java.util.LinkedList;
 
 public class BinaryTreeTest {
 
-	public static BinaryTreeNoParentNode<String> generateStringTree() {
-		BinaryTreeNoParentNode<String> bTreeRoot = new BinaryTreeNoParentNode<String>();
+	public static BinaryTreeNode<String> generateStringTree() {
+		BinaryTreeNode<String> bTreeRoot = new BinaryTreeNode<String>();
 		bTreeRoot.data = "root";
 
-		BinaryTreeNoParentNode<String> bTreeLeft = new BinaryTreeNoParentNode<String>();
+		BinaryTreeNode<String> bTreeLeft = new BinaryTreeNode<String>();
 		bTreeLeft.data = "left";
 
-		BinaryTreeNoParentNode<String> bTreeRight = new BinaryTreeNoParentNode<String>();
+		BinaryTreeNode<String> bTreeRight = new BinaryTreeNode<String>();
 		bTreeRight.data = "right";
 
 		bTreeRoot.left = bTreeLeft;
@@ -21,33 +21,33 @@ public class BinaryTreeTest {
 		return bTreeRoot;
 	}
 
-	public static BinaryTreeNoParentNode<Integer> generateIntegerTree() {
-		BinaryTreeNoParentNode<Integer> bTreeRoot = new BinaryTreeNoParentNode<Integer>();
+	public static BinaryTreeNode<Integer> generateIntegerTree() {
+		BinaryTreeNode<Integer> bTreeRoot = new BinaryTreeNode<Integer>();
 		bTreeRoot.data = 314;
 
-		BinaryTreeNoParentNode<Integer> bTreeLeft = new BinaryTreeNoParentNode<Integer>();
+		BinaryTreeNode<Integer> bTreeLeft = new BinaryTreeNode<Integer>();
 		bTreeLeft.data = 6;
 
-		BinaryTreeNoParentNode<Integer> bTreeRight = new BinaryTreeNoParentNode<Integer>();
+		BinaryTreeNode<Integer> bTreeRight = new BinaryTreeNode<Integer>();
 		bTreeRight.data = 6;
 
 		bTreeRoot.left = bTreeLeft;
 		bTreeRoot.right = bTreeRight;
-		BinaryTreeNoParentNode childNode = addNode(bTreeLeft, 2, "right");
-		BinaryTreeNoParentNode childNode1 = addNode(bTreeRight, 2, "left");
+		BinaryTreeNode childNode = addNode(bTreeLeft, 2, "right");
+		BinaryTreeNode childNode1 = addNode(bTreeRight, 2, "left");
 		addNode(childNode, 3, "right");
 		addNode(childNode1, 2, "left");
 		return bTreeRoot;
 	}
-	private static BinaryTreeNoParentNode addNode(
-			BinaryTreeNoParentNode<Integer> bTreeNode, int i, String string) {
+	private static BinaryTreeNode addNode(
+			BinaryTreeNode<Integer> bTreeNode, int i, String string) {
 		if (string.equals("left")) {
-			BinaryTreeNoParentNode<Integer> node = new BinaryTreeNoParentNode<Integer>();
+			BinaryTreeNode<Integer> node = new BinaryTreeNode<Integer>();
 			node.data = i;
 			bTreeNode.left = node;
 			return node;
 		} else if (string.equals("right")) {
-			BinaryTreeNoParentNode<Integer> node = new BinaryTreeNoParentNode<Integer>();
+			BinaryTreeNode<Integer> node = new BinaryTreeNode<Integer>();
 			node.data = i;
 			bTreeNode.right = node;
 			return node;
@@ -55,19 +55,19 @@ public class BinaryTreeTest {
 		return null;
 	}
 
-	public static ArrayList<ArrayList<BinaryTreeNoParentNode>> getListFromBinrayTree(
-			BinaryTreeNoParentNode root) {
-		LinkedList<BinaryTreeNoParentNode> queue = new LinkedList<BinaryTreeNoParentNode>();
+	public static ArrayList<ArrayList<BinaryTreeNode>> getListFromBinrayTree(
+			BinaryTreeNode root) {
+		LinkedList<BinaryTreeNode> queue = new LinkedList<BinaryTreeNode>();
 		queue.add(root);
-		ArrayList<ArrayList<BinaryTreeNoParentNode>> lists = new ArrayList<ArrayList<BinaryTreeNoParentNode>>();
+		ArrayList<ArrayList<BinaryTreeNode>> lists = new ArrayList<ArrayList<BinaryTreeNode>>();
 		while (!queue.isEmpty()) {
-			ArrayList<BinaryTreeNoParentNode> list = new ArrayList<BinaryTreeNoParentNode>();
+			ArrayList<BinaryTreeNode> list = new ArrayList<BinaryTreeNode>();
 			for (int i = 0; i < queue.size(); i++) {
 				list.add(queue.get(i));
 			}
 			int size = queue.size();
 			for (int i = 0; i < size; i++) {
-				BinaryTreeNoParentNode<String> node = queue.pop();
+				BinaryTreeNode<String> node = queue.pop();
 
 				if (node.left != null) {
 					queue.addLast(node.left);
@@ -81,12 +81,12 @@ public class BinaryTreeTest {
 		return lists;
 	}
 	public static void main(String args[]) {
-		BinaryTreeNoParentNode root = generateIntegerTree();
-		ArrayList<ArrayList<BinaryTreeNoParentNode>> lists = getListFromBinrayTree(root);
+		BinaryTreeNode root = generateIntegerTree();
+		ArrayList<ArrayList<BinaryTreeNode>> lists = getListFromBinrayTree(root);
 
 		for (int i = 0; i < lists.size(); i++) {
-			ArrayList<BinaryTreeNoParentNode> list = lists.get(i);
-			for (BinaryTreeNoParentNode node : list) {
+			ArrayList<BinaryTreeNode> list = lists.get(i);
+			for (BinaryTreeNode node : list) {
 				System.out.print(node.data + " ");
 			}
 			System.out.println();
