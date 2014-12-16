@@ -7,6 +7,8 @@ import com.manoj.interview.utils.BinaryTreeNode;
 
 public class MainTree {
 
+	public static int preIndex = 0;
+
 	public static HashMap<Character, Integer> generateInorderHash(String inOrder) {
 		HashMap<Character, Integer> hash = new HashMap<Character, Integer>();
 		for (int i = 0; i < inOrder.length(); i++) {
@@ -24,21 +26,18 @@ public class MainTree {
 
 		BinaryTreeNode<Character> root = new BinaryTreeNode<Character>();
 
-		char data = preOrder.charAt(0);
-		
+		char data = preOrder.charAt(preIndex++);
 
 		String leftInorder = inOrder.substring(0, inOrder.indexOf(data));
 
-		String rightInorder = inOrder.substring(inOrder.indexOf(data)+1,
+		String rightInorder = inOrder.substring(inOrder.indexOf(data) + 1,
 				inOrder.length());
 
 		root.data = data;
 
-		root.left = reconstructTree(preOrder.substring(1, preOrder.length()),
-				leftInorder, map);
+		root.left = reconstructTree(preOrder, leftInorder, map);
 
-		root.right = reconstructTree(preOrder.substring(1, preOrder.length()),
-				rightInorder, map);
+		root.right = reconstructTree(preOrder, rightInorder, map);
 
 		return root;
 
