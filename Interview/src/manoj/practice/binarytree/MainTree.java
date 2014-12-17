@@ -2,12 +2,15 @@ package manoj.practice.binarytree;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.manoj.interview.utils.BinaryTreeNode;
 
 public class MainTree {
 
 	public static int preIndex = 0;
+
+	public static ArrayList<Character> nullPreOrderWalk = new ArrayList<Character>();
 
 	public static HashMap<Character, Integer> generateInorderHash(String inOrder) {
 		HashMap<Character, Integer> hash = new HashMap<Character, Integer>();
@@ -73,9 +76,11 @@ public class MainTree {
 	public static void printPreOrderWalk(BinaryTreeNode<Character> root) {
 		if (root != null) {
 			System.out.print(root.data);
+			nullPreOrderWalk.add(root.data);
 			printPreOrderWalk(root.left);
 			printPreOrderWalk(root.right);
-		}
+		} else
+			nullPreOrderWalk.add((Character) null);
 
 	}
 
@@ -95,8 +100,27 @@ public class MainTree {
 		return node;
 	}
 
-	public static void main(String args[]) {
+	public static BinaryTreeNode<Character> reconstruct(
+			List<Character> nullPreOrder) {
+		Character data = nullPreOrder.get(preIndex);
+		if (data == null) {
+			return null;
+		}
 
+		BinaryTreeNode<Character> node = new BinaryTreeNode<Character>();
+
+		node.data = nullPreOrder.get(preIndex++);
+
+		node.left = reconstruct(nullPreOrder);
+
+		preIndex++;
+
+		node.right = reconstruct(nullPreOrder);
+
+		return node;
+	}
+
+	public static void testReconstructTree() {
 		String inOrder = "FBAEHCDIG";
 		String preOrder = "HBFEACDGI";
 
@@ -114,6 +138,25 @@ public class MainTree {
 		System.out.println();
 
 		printInorderWalk(reconstructTreeBNode);
+	}
 
+	public static void testReconstruct() {
+
+		BinaryTreeNode<Character> root = genTree();
+		printPreOrderWalk(root);
+
+		List<Character> preOrder = nullPreOrderWalk;
+
+		BinaryTreeNode<Character> reconstructedTree = reconstruct(preOrder);
+
+		nullPreOrderWalk.clear();
+		System.out.println();
+		printPreOrderWalk(reconstructedTree);
+		
+		System.out.println(nullPreOrderWalk.equals(preOrder));
+	}
+
+	public static void main(String args[]) {
+		testReconstruct();
 	}
 }
