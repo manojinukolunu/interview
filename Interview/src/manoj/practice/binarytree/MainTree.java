@@ -2,7 +2,10 @@ package manoj.practice.binarytree;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.Stack;
 
 import com.manoj.interview.utils.BinaryTreeNode;
 
@@ -69,6 +72,9 @@ public class MainTree {
 		if (root != null) {
 			printInorderWalk(root.left);
 			System.out.print(root.data);
+			if ((root.left == null) && (root.right == null)) {
+				// System.out.print(root.data);
+			}
 			printInorderWalk(root.right);
 		}
 	}
@@ -79,8 +85,9 @@ public class MainTree {
 			nullPreOrderWalk.add(root.data);
 			printPreOrderWalk(root.left);
 			printPreOrderWalk(root.right);
-		} else
+		} else {
 			nullPreOrderWalk.add((Character) null);
+		}
 
 	}
 
@@ -95,7 +102,6 @@ public class MainTree {
 
 	public static BinaryTreeNode<Character> createNode(Character ch) {
 		BinaryTreeNode<Character> node = new BinaryTreeNode<Character>();
-
 		node.data = ch;
 		return node;
 	}
@@ -152,11 +158,90 @@ public class MainTree {
 		nullPreOrderWalk.clear();
 		System.out.println();
 		printPreOrderWalk(reconstructedTree);
-		
+
 		System.out.println(nullPreOrderWalk.equals(preOrder));
 	}
 
+	public static BinaryTreeNode<Character> genTree2() {
+		BinaryTreeNode<Character> node = new BinaryTreeNode<Character>();
+		node.data = 'A';
+		node.left = new BinaryTreeNode<Character>();
+		node.left.data = 'B';
+		node.left.left = new BinaryTreeNode<Character>();
+		node.left.left.data = 'C';
+		node.left.left.left = new BinaryTreeNode<Character>();
+		node.left.left.left.data = 'D';
+		node.left.left.right = new BinaryTreeNode<Character>();
+		node.left.left.right.data = 'E';
+
+		node.left.right = new BinaryTreeNode<Character>();
+		node.left.right.data = 'F';
+		node.left.right.right = new BinaryTreeNode<Character>();
+		node.left.right.right.data = 'G';
+		node.left.right.right.left = new BinaryTreeNode<Character>();
+		node.left.right.right.left.data = 'H';
+
+		// add right nodes
+
+		node.right = new BinaryTreeNode<Character>();
+		node.right.data = 'I';
+		node.right.left = new BinaryTreeNode<Character>();
+		node.right.left.data = 'J';
+		node.right.right = new BinaryTreeNode<Character>();
+		node.right.right.data = 'O';
+		node.right.left.right = createNode('K');
+		node.right.left.right.left = createNode('L');
+		node.right.left.right.right = createNode('N');
+		node.right.left.right.left.right = createNode('M');
+		node.right.right.right = createNode('P');
+		return node;
+	}
+
+	public static void printLeaves() {
+		BinaryTreeNode<Character> root = genTree2();
+		printInorderWalk(root);
+	}
+
+	public static void getPath(BinaryTreeNode<Character> node, Character ch) {
+		Stack<BinaryTreeNode> stack = new Stack<BinaryTreeNode>();
+		Set<Character> visited = new HashSet<Character>();
+
+		stack.push(node);
+		stack.push(node.left);
+
+	}
+
+	public static BinaryTreeNode<Character> getLCA(
+			BinaryTreeNode<Character> root, BinaryTreeNode<Character> nodeA,
+			BinaryTreeNode<Character> nodeB) {
+		if (root == null) {
+			return null;
+		} else if (root.data == nodeA.data || root.data == nodeB.data) {
+			return root;
+		}
+
+		BinaryTreeNode<Character> lLCA = getLCA(root.left, nodeA, nodeB);
+		BinaryTreeNode<Character> rLCA = getLCA(root.right, nodeA, nodeB);
+
+		if (lLCA != null && rLCA != null) {
+			return root;
+		}
+
+		return lLCA == null ? rLCA : lLCA;
+	}
+
+	public static void getLCATest() {
+		BinaryTreeNode<Character> root = genTree2();
+
+		BinaryTreeNode<Character> l = createNode('G');
+		BinaryTreeNode<Character> r = createNode('P');
+
+		BinaryTreeNode<Character> lca = getLCA(root, l, r);
+
+		System.out.println(lca.data);
+	}
+
 	public static void main(String args[]) {
-		testReconstruct();
+
 	}
 }
