@@ -3,7 +3,7 @@ package manoj.experiments;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class TrieST<Value> {
+public class TrieST<T> {
 
 	private static int R = 256; // radix
 
@@ -14,13 +14,13 @@ public class TrieST<Value> {
 		private Node[] next = new Node[R];
 	}
 
-	public Value get(String key) {
+	public T get(String key) {
 		Node x = get(root, key, 0);
 
 		if (x == null) {
 			return null;
 		}
-		return (Value) x.val;
+		return (T) x.val;
 	}
 
 	private Node get(Node x, String key, int d) {
@@ -36,11 +36,11 @@ public class TrieST<Value> {
 		return get(x.next[c], key, d + 1);
 	}
 
-	public void put(String key, Value val) {
+	public void put(String key, T val) {
 		root = put(root, key, val, 0);
 	}
 
-	public Node put(Node x, String key, Value val, int d) {
+	public Node put(Node x, String key, T val, int d) {
 		if (x == null) {
 			x = new Node();
 		}
