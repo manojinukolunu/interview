@@ -33,9 +33,12 @@ public class TrieNode {
 		for (int i = 0; i < key.length(); i++) {
 			Character ch = key.charAt(i);
 			if (tempLinks.containsKey(ch)) {
+<<<<<<< HEAD
 				if (i == key.length() - 1) {
 					tempLinks.get(ch).terminates = true;
 				}
+=======
+>>>>>>> d6222f81990329a1e2247d998847720f85025f50
 				tempLinks = tempLinks.get(ch).linksMap;
 			} else {
 				TrieNode newNode = new TrieNode(ch);
@@ -73,6 +76,30 @@ public class TrieNode {
 
 	private static ArrayList<String> getKeysIterative(TrieNode node) {
 		ArrayList<String> keys = new ArrayList<String>();
+<<<<<<< HEAD
+=======
+		class Holder {
+			private TrieNode currentNode;
+			private LinkedList<TrieNode> unvisitedNodes;
+
+			public Holder() {
+				unvisitedNodes = new LinkedList<TrieNode>();
+			}
+
+			public TrieNode getCurretNode() {
+				return currentNode;
+			}
+
+			public LinkedList<TrieNode> getUnvisitedNodes() {
+				return unvisitedNodes;
+			}
+
+			public void SetUnvisitedNodes(LinkedList<TrieNode> nodes) {
+				unvisitedNodes = nodes;
+			}
+
+		}
+>>>>>>> d6222f81990329a1e2247d998847720f85025f50
 
 		Holder hold = new Holder();
 		LinkedList<TrieNode> list = new LinkedList<TrieNode>();
@@ -88,6 +115,7 @@ public class TrieNode {
 			Holder currentHolder = stack.getFirst();
 			LinkedList<TrieNode> unvisited = currentHolder.getUnvisitedNodes();
 			TrieNode currentNode = currentHolder.getCurretNode();
+<<<<<<< HEAD
 			if (currentNode.terminates && unvisited.size() == 0) {
 				// add the contents of the stack to the list of strings and pop
 				// the lastNode
@@ -95,6 +123,13 @@ public class TrieNode {
 				// dont need the first element
 				for (int k = 0; k < stack.size() - 1; k++) {
 					Holder _hold = stack.get(k);
+=======
+			if (currentNode.terminates) {
+				// add the contents of the stack to the list of strings and pop
+				// the lastNode
+				StringBuffer buff = new StringBuffer();
+				for (Holder _hold : stack) {
+>>>>>>> d6222f81990329a1e2247d998847720f85025f50
 					buff.append(_hold.getCurretNode().data);
 				}
 				keys.add(buff.reverse().toString());
@@ -102,7 +137,10 @@ public class TrieNode {
 					stack.pop();
 					continue;
 				}
+<<<<<<< HEAD
 
+=======
+>>>>>>> d6222f81990329a1e2247d998847720f85025f50
 			}
 			if (unvisited.size() > 0) {
 				// get the first unvisited node and add it to the top of the
@@ -123,12 +161,15 @@ public class TrieNode {
 		return keys;
 	}
 
+<<<<<<< HEAD
 	private static void printStack(LinkedList<Holder> stack) {
 		for (Holder h : stack) {
 			System.out.print(h.currentNode.data + " ");
 		}
 	}
 
+=======
+>>>>>>> d6222f81990329a1e2247d998847720f85025f50
 	public static ArrayList<String> getStartingWith(TrieNode root, String start) {
 		TrieNode currNode = null;
 		currNode = root;
@@ -150,8 +191,12 @@ public class TrieNode {
 		for (int i = 0; i < keys.size(); i++) {
 			keys.set(i, buff.toString() + keys.get(i));
 
+<<<<<<< HEAD
 		}
 		return keys;
+=======
+		return getKeysIterative(currNode);
+>>>>>>> d6222f81990329a1e2247d998847720f85025f50
 	}
 
 	public static void printKeysInTrie(TrieNode node) {
@@ -172,8 +217,11 @@ public class TrieNode {
 		TrieNode root = new TrieNode();// create a root trie
 
 		root.addToTrie("He");
+<<<<<<< HEAD
 		root.addToTrie("Heston");
 		root.addToTrie("H");
+=======
+>>>>>>> d6222f81990329a1e2247d998847720f85025f50
 		root.addToTrie("Hello");
 		root.addToTrie("Hell");
 		root.addToTrie("Hellish");
