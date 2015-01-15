@@ -9,6 +9,7 @@ import java.util.LinkedList;
 public class Solution {
 
 	private static boolean isValidRow(char[] row) {
+		int[] arr = new int[10];
 		return true;
 	}
 	private static boolean isValidColumn(char[] column) {
@@ -22,8 +23,7 @@ public class Solution {
 	public static boolean isValidSudoku(char[][] board) {
 		return false;
 	}
-	
-	
+
 	private static boolean hasPathSumRecursive(TreeNode root, int sum) {
 		if (root == null && sum == 0) {
 			return true;
