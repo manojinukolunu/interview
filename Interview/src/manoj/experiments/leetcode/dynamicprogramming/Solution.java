@@ -19,6 +19,21 @@ public class Solution {
 		}
 	}
 
+	public int maxSubArray(int[] A) {
+		int[] sum = new int[A.length];
+
+		sum[0] = A[0];
+		int max = sum[0];
+		for (int i = 1; i < A.length; i++) {
+			sum[i] = Math.max(sum[i - 1], Math.max(sum[i - 1] + A[i], A[i]));
+			if (sum[i] > max) {
+				max = sum[i];
+			}
+		}
+		System.out.println(Arrays.toString(sum));
+		return max;
+	}
+
 	public int minPathSum(int[][] grid) {
 		int numRows = grid.length;
 		int numColumns = grid[0].length;
@@ -84,10 +99,7 @@ public class Solution {
 
 	public static void main(String args[]) {
 		Solution sol = new Solution();
-		int arr[][] = { { 0 } };
-
-		System.out.println(sol.uniquePaths(1, 2));
-		int obstacleGrid[][] = { { 0, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 } };
-		System.out.println(sol.uniquePathsWithObstacles(obstacleGrid));
+		int arr[] = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+		System.out.println(sol.maxSubArray(arr));
 	}
 }
